@@ -1,5 +1,5 @@
 @echo off
-echo Compiling...
+echo.
 
 javac -d . *.java
 
@@ -9,9 +9,6 @@ if %errorlevel% neq 0 (
     pause
     exit /b
 )
-
-echo.
-echo Running program...
 echo.
 
 java Guessing_Game.Main
