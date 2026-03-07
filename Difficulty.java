@@ -1,6 +1,5 @@
 package Guessing_Game;
 
-
 public enum Difficulty
 {
     EASY(50, 10),

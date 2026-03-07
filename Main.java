@@ -6,8 +6,10 @@ public class Main
     public static void main(String args[])
     {
         Scanner input = new Scanner(System.in);
-        Difficulty difficulty;
+        Difficulty difficulty = null;
+        Game game;
         int userOptionDifficulty;
+        //char userInput;
 
         //user message
         System.out.println("----------Welcome to the guessing game!----------");
@@ -32,9 +34,19 @@ public class Main
                 case 3:
                     difficulty = Difficulty.HARD;
                     break;
+                case -1:
+                    System.out.println("Closing the game");
+                    break;
                 default:
-                    System.out.println("Unexpected input");
+                    System.out.println("Unexpected input");                
             }
+
+            game = new Game(input, difficulty.getMaxNumber(), difficulty.getAttempts());
+            game.play();
+            // System.out.println("Would you like to continue?");
+            // input.next();
+            // userInput = input.next().charAt(0);
+            
         }while(userOptionDifficulty != -1);
     }
 }
