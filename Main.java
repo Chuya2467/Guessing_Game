@@ -1,14 +1,16 @@
 package Guessing_Game;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main
 {
-    public static void main(String args[])
+    public static void main(String[] args)
     {
+        //varibles
         Scanner input = new Scanner(System.in);
         Difficulty difficulty = null;
         Game game;
-        int userOptionDifficulty;
+        int userOptionDifficulty = 0;
         char userInput;
         int gameNumber = 1;
 
@@ -19,11 +21,24 @@ public class Main
         System.out.println("Medium: 1-100 numbers range, \t7 attempts");
         System.out.println("Hard: \t1-200 numbers range, \t5 attempts\n");
 
+        //menu
         do
         {
+            //1-easy level; 2-medium; 3-hard; (-1)-exit
             System.out.println("Please choose difficulty. Enter 1 for Easy, 2 for Medium, 3 for Hard or -1 to exit: ");
-            userOptionDifficulty = input.nextInt();
 
+            //try-catch for unexpected input like letters
+            try         
+            {
+                userOptionDifficulty = input.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Unexpected input");
+                input.next();
+                continue;
+            }
+
+            //assingning value
             switch(userOptionDifficulty)
             {
                 case 1:
@@ -43,9 +58,12 @@ public class Main
                     continue;
             }
 
-            game = new Game(input, difficulty.getMaxNumber(), difficulty.getAttempts());
-            game.play(gameNumber);
-            gameNumber++;
+            //playing the game
+            game = new Game(input, difficulty.getMaxNumber(), difficulty.getAttempts());    //calling constructor
+            game.play(gameNumber);  //playing
+            gameNumber++;           //game number incrementing
+
+            //continuing a game or exit
             System.out.print("Would you like to continue?(y/n) ");
             userInput = input.next().charAt(0);
             switch(userInput)
@@ -58,6 +76,8 @@ public class Main
                     System.out.println("Closing the game");
                     userOptionDifficulty = -1;
                     continue;
+                default:
+                    System.out.println("Unexpected input");
             }
             
         }while(userOptionDifficulty != -1);
