@@ -10,6 +10,7 @@ public class Game
     private Scanner input;
     private int maxNumber;
     private int tries;
+    private boolean result = false;
 
     //constructor
     public Game(Scanner input, int maxNumber, int tries)
@@ -52,12 +53,19 @@ public class Game
             else
             {
                 System.out.println("YOU WON! Secret number was " + secretNumber);
+                result = true;
                 System.out.println("Returning to menu...\n\n");     //returning back to menu in Main.java
                 return;
             }
         }
 
         System.out.println("You lose! Secret number was " + secretNumber);
+        result = false;
         System.out.println("Returning to menu...\n\n");             //returning back to menu in Main.java
+    }
+
+    public boolean getResult()
+    {
+        return result;
     }
 }

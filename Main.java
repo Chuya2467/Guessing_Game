@@ -10,6 +10,7 @@ public class Main
         Scanner input = new Scanner(System.in);
         Difficulty difficulty = null;
         Game game;
+        Scores scores = new Scores();
         int userOptionDifficulty = 0;
         char userInput;
         int gameNumber = 1;
@@ -61,6 +62,7 @@ public class Main
             //playing the game
             game = new Game(input, difficulty.getMaxNumber(), difficulty.getAttempts());    //calling constructor
             game.play(gameNumber);  //playing
+            scores.write(game.getResult(), gameNumber);
             gameNumber++;           //game number incrementing
 
             //continuing a game or exit
