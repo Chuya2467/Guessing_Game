@@ -8,7 +8,6 @@ public class Game
     private Scanner input;
     private int maxNumber;
     private int tries;
-    private int gameNumber = 1;
 
     public Game(Scanner input, int maxNumber, int tries)
     {
@@ -17,28 +16,31 @@ public class Game
         this.tries = tries;
     }
 
-    public void play()
+    public void play(int gameNumber)
     {
         int secretNumber = random.nextInt(maxNumber) + 1;
         int guess;
+
         System.out.println("----------GAME " + gameNumber + "----------");
 
-        for(int i = 0; i < tries; i++)
+        for(int i = tries; i > 0; i--)
         {
             System.out.print("Please enter your guess: ");
             guess = input.nextInt();
 
             if(guess < secretNumber)
-                System.out.println("Too low");
+                System.out.println("Too low.  " + (i - 1) + " attempts left");
             else if(guess > secretNumber)
-                System.out.println("Too high");
+                System.out.println("Too high. " + (i - 1) + " attempts left");
             else
             {
                 System.out.println("YOU WON! Secret number was " + secretNumber);
+                System.out.println("Returning to menu...\n\n");
                 return;
             }
         }
 
-        System.out.println("You loose! Secret number was " + secretNumber);
+        System.out.println("You lose! Secret number was " + secretNumber);
+        System.out.println("Returning to menu...\n\n");
     }
 }

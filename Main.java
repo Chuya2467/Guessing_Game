@@ -9,7 +9,8 @@ public class Main
         Difficulty difficulty = null;
         Game game;
         int userOptionDifficulty;
-        //char userInput;
+        char userInput;
+        int gameNumber = 1;
 
         //user message
         System.out.println("----------Welcome to the guessing game!----------");
@@ -20,7 +21,7 @@ public class Main
 
         do
         {
-            System.out.println("Please, enter 1 for Easy, 2 for Medium, 3 for Hard or -1 to exit: ");
+            System.out.println("Please choose difficulty. Enter 1 for Easy, 2 for Medium, 3 for Hard or -1 to exit: ");
             userOptionDifficulty = input.nextInt();
 
             switch(userOptionDifficulty)
@@ -36,16 +37,28 @@ public class Main
                     break;
                 case -1:
                     System.out.println("Closing the game");
-                    break;
+                    continue;
                 default:
-                    System.out.println("Unexpected input");                
+                    System.out.println("Unexpected input");
+                    continue;
             }
 
             game = new Game(input, difficulty.getMaxNumber(), difficulty.getAttempts());
-            game.play();
-            // System.out.println("Would you like to continue?");
-            // input.next();
-            // userInput = input.next().charAt(0);
+            game.play(gameNumber);
+            gameNumber++;
+            System.out.print("Would you like to continue?(y/n) ");
+            userInput = input.next().charAt(0);
+            switch(userInput)
+            {
+                case 'y':
+                case 'Y':
+                    continue;
+                case 'n':
+                case 'N':
+                    System.out.println("Closing the game");
+                    userOptionDifficulty = -1;
+                    continue;
+            }
             
         }while(userOptionDifficulty != -1);
     }
